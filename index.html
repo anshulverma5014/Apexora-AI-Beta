@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apexora AI Beta | Career, Skills & College Platform</title>
+<meta name="description" content="Apexora AI Beta — Skills develop karo, colleges dhundo, career banao. India ke students ke liye." />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #00ff88;
+    --green-dim: #00cc66;
+    --green-glow: rgba(0,255,136,0.15);
+    --green-glow-strong: rgba(0,255,136,0.3);
+    --bg: #050a0e;
+    --bg2: #0a1218;
+    --bg3: #0d1a22;
+    --card: #0d1f2d;
+    --card-border: rgba(0,255,136,0.12);
+    --card-border-hover: rgba(0,255,136,0.35);
+    --text: #e8f4f0;
+    --text-dim: #7a9a8a;
+    --text-muted: #4a6a5a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(5,10,14,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0,255,136,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--green);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-logo-icon {
+    width: 28px; height: 28px;
+    background: var(--green-glow);
+    border: 1px solid var(--green);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .beta-pill {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--bg);
+    background: var(--green);
+    border-radius: 20px;
+    padding: 2px 7px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--green);
+    background: var(--green-glow);
+  }
+
+  .nav-cta {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--bg) !important;
+    background: var(--green) !important;
+    padding: 7px 18px !important;
+    border-radius: 8px !important;
+  }
+
+  .nav-cta:hover { opacity: 0.9; }
+
+  /* SECTIONS */
+  .page-section { display: none; padding-top: 64px; min-height: 100vh; }
+  .page-section.active { display: block; }
+
+  /* ===== HERO ===== */
+  #sec-home {
+    background:
+      radial-gradient(ellipse 60% 50% at 50% -10%, rgba(0,255,136,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,200,100,0.06) 0%, transparent 50%),
+      var(--bg);
+  }
+
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--green);
+    background: var(--green-glow);
+    border: 1px solid var(--card-border-hover);
+    border-radius: 20px;
+    padding: 5px 14px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-badge span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .hero h1 .highlight {
+    color: var(--green);
+    text-shadow: 0 0 40px rgba(0,255,136,0.4);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .search-wrap {
+    max-width: 580px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    padding: 16px 130px 16px 50px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s;
+    outline: none;
+  }
+
+  .search-wrap input:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px var(--green-glow);
+  }
+
+  .search-wrap input::placeholder { color: var(--text-muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 18px;
+  }
+
+  .search-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--green);
+    color: var(--bg);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: opacity 0.2s;
+  }
+
+  .search-btn:hover { opacity: 0.85; }
+
+  .search-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .search-tag {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    border: 1px solid rgba(0,255,136,0.1);
+    border-radius: 20px;
+    padding: 4px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .search-tag:hover {
+    color: var(--green);
+    border-color: var(--green);
+    background: var(--green-glow);
+  }
+
+  /* STATS */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 640px;
+    margin: 0 auto 4rem;
+  }
+
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--green);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* FEATURE GRID */
+  .section-label {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.8px;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .features-section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .feat-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .feat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, var(--green-glow) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .feat-card:hover {
+    border-color: var(--card-border-hover);
+    transform: translateY(-3px);
+  }
+
+  .feat-card:hover::before { opacity: 1; }
+
+  .feat-icon {
+    width: 44px; height: 44px;
+    background: var(--green-glow);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .feat-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .feat-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+
+  .feat-arrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: all 0.2s;
+  }
+
+  .feat-card:hover .feat-arrow {
+    color: var(--green);
+    transform: translate(2px, -2px);
+  }
+
+  /* ===== INNER PAGES ===== */
+  .inner-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .inner-page .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,255,136,0.08);
+  }
+
+  .page-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+
+  .page-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin-bottom: 4px;
+  }
+
+  .page-desc { font-size: 0.9rem; color: var(--text-dim); }
+
+  /* FILTER ROW */
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-btn {
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,255,136,0.15);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--green-glow);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  /* SEARCH BAR INNER */
+  .inner-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .inner-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .inner-search input::placeholder { color: var(--text-muted); }
+  .inner-search-icon { color: var(--text-muted); font-size: 16px; }
+
+  .inner-search-btn {
+    background: var(--green);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* SKILL TRACKS */
+  .skill-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .skill-item:hover { border-color: var(--card-border-hover); }
+
+  .skill-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .skill-name-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-emoji { font-size: 18px; }
+
+  .skill-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .skill-pct {
+    font-size: 0.78rem;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .skill-level-badge {
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,255,136,0.2);
+    color: var(--text-dim);
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green-dim), var(--green));
+    border-radius: 20px;
+    transition: width 0.8s cubic-bezier(.4,0,.2,1);
+  }
+
+  .skill-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: 5px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,255,136,0.2);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .btn-sm:hover { border-color: var(--green); color: var(--green); }
+
+  .btn-sm.primary {
+    background: var(--green-glow);
+    border-color: rgba(0,255,136,0.4);
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* COLLEGE CARDS */
+  .college-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: border-color 0.2s;
+  }
+
+  .college-item:hover { border-color: var(--card-border-hover); }
+
+  .college-rank {
+    width: 42px; height: 42px;
+    flex-shrink: 0;
+    background: var(--green-glow);
+    border: 1px solid rgba(0,255,136,0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .college-info { flex: 1; }
+
+  .college-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .college-loc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .college-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .ctag {
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-dim);
+  }
+
+  /* CAREER CARDS */
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .career-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.3rem;
+    cursor: pointer;
+    transition: all 0.22s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .career-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .career-card:hover {
+    border-color: var(--card-border-hover);
+    transform: translateY(-2px);
+  }
+
+  .career-card:hover::after { opacity: 1; }
+
+  .career-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+
+  .career-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .career-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  /* ROADMAP */
+  .roadmap-wrap { margin-bottom: 2rem; }
+
+  .roadmap-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--green);
+  }
+
+  .roadmap-step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+
+  .step-dot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .step-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--green-glow);
+    border: 1px solid var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--green);
+    flex-shrink: 0;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .step-dot.done { background: rgba(0,255,136,0.25); }
+
+  .step-line {
+    width: 1px;
+    flex: 1;
+    min-height: 20px;
+    background: rgba(0,255,136,0.15);
+    margin-top: 4px;
+  }
+
+  .step-body { padding-top: 4px; }
+  .step-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 2px; font-family: 'Space Grotesk', sans-serif; }
+  .step-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* LEARN */
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .learn-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.3rem;
+    cursor: pointer;
+    transition: all 0.22s;
+  }
+
+  .learn-card:hover { border-color: var(--card-border-hover); }
+
+  .learn-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+  .learn-title { font-family: 'Space Grotesk', sans-serif; font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+  .learn-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(0,255,136,0.08);
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--text-dim); text-decoration: none; }
+  footer a:hover { color: var(--green); }
+
+  /* AI ADVISOR BTN */
+  .ai-advisor-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    background: var(--green);
+    color: var(--bg);
+    border: none;
+    border-radius: 50px;
+    padding: 12px 22px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 24px rgba(0,255,136,0.25), 0 0 0 1px rgba(0,255,136,0.2);
+    transition: all 0.2s;
+    animation: floatBtn 3s ease-in-out infinite;
+  }
+
+  @keyframes floatBtn {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .ai-advisor-btn:hover {
+    box-shadow: 0 6px 32px rgba(0,255,136,0.4);
+    opacity: 0.92;
+  }
+
+  /* GLOW BG FOR INNER PAGES */
+  #sec-skills, #sec-colleges, #sec-careers, #sec-learn {
+    background:
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(0,255,136,0.05) 0%, transparent 60%),
+      var(--bg);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * { animation: fadeUp 0.6s ease both; }
+  .hero > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero > *:nth-child(2) { animation-delay: 0.12s; }
+  .hero > *:nth-child(3) { animation-delay: 0.2s; }
+  .hero > *:nth-child(4) { animation-delay: 0.28s; }
+  .hero > *:nth-child(5) { animation-delay: 0.35s; }
+  .hero > *:nth-child(6) { animation-delay: 0.42s; }
+
+  /* FAQ */
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .faq-q {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.4rem;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-q:hover { color: var(--green); }
+
+  .faq-arrow { font-size: 16px; transition: transform 0.2s; color: var(--text-muted); }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--green); }
+
+  .faq-a {
+    display: none;
+    padding: 0 1.4rem 1rem;
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    border-top: 1px solid rgba(0,255,136,0.06);
+    padding-top: 10px;
+  }
+
+  .faq-item.open .faq-a { display: block; }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero { padding: 3rem 1rem 2rem; }
+    .features-section { padding: 2rem 1rem; }
+    .inner-page { padding: 2rem 1rem; }
+    .stats-row { grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .stat-num { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo" onclick="showSection('home')">
+    <div class="nav-logo-icon">🚀</div>
+    Apexora AI
+    <span class="beta-pill">BETA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showSection('home')" id="nl-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showSection('skills')" id="nl-skills">Skills</a></li>
+    <li><a href="#" onclick="showSection('colleges')" id="nl-colleges">Colleges</a></li>
+    <li><a href="#" onclick="showSection('careers')" id="nl-careers">Careers</a></li>
+    <li><a href="#" onclick="showSection('learn')" id="nl-learn">Learn</a></li>
+    <li><a href="#" onclick="showSection('home')" class="nav-cta">Start Now →</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section class="page-section active" id="sec-home">
+  <div class="hero">
+    <div class="hero-badge"><span></span> Apexora AI — Beta Version </div>
+    <h1>Apna Future<br /><span class="highlight">Khud Likho</span></h1>
+    <p>Skills develop karo, colleges dhundo, career roadmap banao.<br />India ke students ke liye — bilkul free.</p>
+
+    <div class="search-wrap">
+      
+     
+    </div>
+
+    <div class="search-tags">
+      <button class="search-tag" onclick="showSection('skills')">⚡ Skill Development</button>
+      <button class="search-tag" onclick="showSection('colleges')">🏫 College Search</button>
+      <button class="search-tag" onclick="showSection('careers');loadCareer('youtube')">📺 YouTube</button>
+      <button class="search-tag" onclick="showSection('careers');loadCareer('trading')">📈 Trading</button>
+      <button class="search-tag" onclick="showSection('careers');loadCareer('business')">💼 Business</button>
+      <button class="search-tag" onclick="showSection('careers');loadCareer('engineering')">💻 Engineering</button>
+      <button class="search-tag" onclick="showSection('careers');loadCareer('upsc')">🎖️ UPSC</button>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box"><span class="stat-num">50+</span><span class="stat-label">Skills Available</span></div>
+      <div class="stat-box"><span class="stat-num">20+</span><span class="stat-label">Colleges Listed</span></div>
+      <div class="stat-box"><span class="stat-num">100%</span><span class="stat-label">Free — Always</span></div>
+    </div>
+  </div>
+
+  <div class="features-section">
+    <div class="section-label">✦ Features</div>
+    <h2 class="section-heading">Kya Milega Apexora Beta Mein?</h2>
+    <p class="section-sub">Ek platform, sab kuch — skills se college tak, career se resources tak.</p>
+    <div class="features-grid">
+      <a href="#" class="feat-card" onclick="showSection('skills')">
+        <div class="feat-icon">⚡</div>
+        <div class="feat-title">Skill Development</div>
+        <div class="feat-desc">Coding, trading, YouTube, business — apni skill track karo, step-by-step seekho.</div>
+        <span class="feat-arrow">↗</span>
+      </a>
+      <a href="#" class="feat-card" onclick="showSection('colleges')">
+        <div class="feat-icon">🏫</div>
+        <div class="feat-title">College Search</div>
+        <div class="feat-desc">IIT, NIT, AIIMS, Private — filter karke apna best college dhundo.</div>
+        <span class="feat-arrow">↗</span>
+      </a>
+      <a href="#" class="feat-card" onclick="showSection('careers')">
+        <div class="feat-icon">🗺️</div>
+        <div class="feat-title">Career Roadmaps</div>
+        <div class="feat-desc">YouTube, Business, Trading, Engineering — har career ka complete roadmap.</div>
+        <span class="feat-arrow">↗</span>
+      </a>
+      <a href="#" class="feat-card" onclick="showSection('learn')">
+        <div class="feat-icon">📚</div>
+        <div class="feat-title">Free Resources</div>
+        <div class="feat-desc">Best YouTube channels, courses, books — sab curated, bilkul free.</div>
+        <span class="feat-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="features-section" style="padding-top:0">
+    <div class="section-label">✦ FAQ</div>
+    <h2 class="section-heading">Common Sawaal</h2>
+    <p class="section-sub">Jo sabse zyada pooche jaate hain</p>
+    <div style="max-width:680px; margin:0 auto;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Apexora Beta mein kya naya hai? <span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Beta mein Skills Development tracker, 500+ College Search, YouTube/Trading/Business roadmaps, aur AI Career Advisor feature add kiye gaye hain. Yeh sab original version mein nahi tha.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Kya yeh platform paid hai? <span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Bilkul nahi! Apexora AI 100% free hai — koi hidden charges nahi, koi subscription nahi. Indian students ke liye hamesha free rahega.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">YouTube ya Trading career ke liye kahan se shuru karein? <span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Careers section mein jaao, apna career card click karo — complete step-by-step roadmap milega. Beginner se pro tak sab kuch explained hai.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">College search mein kya IIT aur AIIMS dono hain? <span class="faq-arrow">▼</span></button>
+        <div class="faq-a">Haan! Engineering (IIT, NIT), Medical (AIIMS, JIPMER), Law (NLSIU, NLU), aur Private colleges — sab filter karke dekh sakte ho fees aur cutoff ke saath.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p style="margin-bottom:14px;">🚀 <strong style="color:var(--text)">Apexora AI Beta</strong> — India ke students ke liye free platform</p>
+    
+    <div style="display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:18px;">
+      <a href="https://www.linkedin.com/in/anshul-raj-verma-643338346" target="_blank" style="display:flex;align-items:center;gap:6px;background:#0d1f2d;border:1px solid rgba(0,255,136,0.15);border-radius:8px;padding:7px 16px;font-size:0.8rem;color:var(--text-dim);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(0,255,136,0.5)';this.style.color='#00ff88'" onmouseout="this.style.borderColor='rgba(0,255,136,0.15)';this.style.color='var(--text-dim)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      
+      </a>
+      <a href="https://github.com/anshulverma5014" target="_blank" style="display:flex;align-items:center;gap:6px;background:#0d1f2d;border:1px solid rgba(0,255,136,0.15);border-radius:8px;padding:7px 16px;font-size:0.8rem;color:var(--text-dim);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(0,255,136,0.5)';this.style.color='#00ff88'" onmouseout="this.style.borderColor='rgba(0,255,136,0.15)';this.style.color='var(--text-dim)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://anshulverma5014.github.io/Resume-Builder/" target="_blank" style="display:flex;align-items:center;gap:6px;background:#0d1f2d;border:1px solid rgba(0,255,136,0.15);border-radius:8px;padding:7px 16px;font-size:0.8rem;color:var(--text-dim);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(0,255,136,0.5)';this.style.color='#00ff88'" onmouseout="this.style.borderColor='rgba(0,255,136,0.15)';this.style.color='var(--text-dim)'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Resume Builder
+      </a>
+    </div>
+    <p style="font-size:0.75rem; color:var(--text-muted);">© 2026 Apexora AI · Anshul Raj Verma</p>
+  </footer>
+</section>
+
+<!-- SKILLS -->
+<section class="page-section" id="sec-skills">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-eyebrow">✦ Skill Development</div>
+      <div class="page-title">Apni Skills Track Karo</div>
+      <div class="page-desc">Coding, trading, YouTube, business — progress dekho, aage badhte raho</div>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterSkills('all',this)">Sab</button>
+      <button class="filter-btn" onclick="filterSkills('tech',this)">💻 Tech</button>
+      <button class="filter-btn" onclick="filterSkills('finance',this)">📈 Finance</button>
+      <button class="filter-btn" onclick="filterSkills('business',this)">💼 Business</button>
+      <button class="filter-btn" onclick="filterSkills('creative',this)">🎬 Creative</button>
+    </div>
+
+    <div id="skills-list">
+      <div class="skill-item" data-cat="tech">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">💻</span>
+            <span class="skill-name">Web Development</span>
+            <span class="skill-level-badge">Intermediate</span>
+          </div>
+          <span class="skill-pct">65%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('Web development ka next step aur resources batao — HTML CSS JS ke baad kya seekhein India mein job ke liye')">Continue ↗</button>
+          <button class="btn-sm" onclick="gotoAI('React ya Vue mein se kaunsa better hai beginners ke liye 2025 mein?')">React vs Vue ↗</button>
+        </div>
+      </div>
+
+      <div class="skill-item" data-cat="finance">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">📈</span>
+            <span class="skill-name">Stock Market Trading</span>
+            <span class="skill-level-badge">Beginner</span>
+          </div>
+          <span class="skill-pct">20%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('Stock market trading kaise seekhein? Beginners ke liye India mein Zerodha se shuru kaise karein?')">Start Learning ↗</button>
+          <button class="btn-sm" onclick="gotoAI('Technical analysis kya hota hai? Candlestick patterns simple mein samjhao')">Technical Analysis ↗</button>
+        </div>
+      </div>
+
+      <div class="skill-item" data-cat="creative">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">📺</span>
+            <span class="skill-name">YouTube Content Creation</span>
+            <span class="skill-level-badge">Beginner</span>
+          </div>
+          <span class="skill-pct">10%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('YouTube channel kaise shuru karein 2025 mein India mein? Kaunsa niche best hai?')">Start ↗</button>
+          <button class="btn-sm" onclick="gotoAI('YouTube SEO kaise karte hain? Title, tags aur thumbnail tips batao')">YouTube SEO ↗</button>
+        </div>
+      </div>
+
+      <div class="skill-item" data-cat="business">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">💼</span>
+            <span class="skill-name">Business & Entrepreneurship</span>
+            <span class="skill-level-badge">Beginner</span>
+          </div>
+          <span class="skill-pct">5%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:5%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('India mein business kaise shuru karein? Students ke liye small business ideas batao')">Explore ↗</button>
+          <button class="btn-sm" onclick="gotoAI('Startup funding kaise milti hai India mein? Angel investors aur VCs ke baare mein batao')">Funding ↗</button>
+        </div>
+      </div>
+
+      <div class="skill-item" data-cat="finance">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">🪙</span>
+            <span class="skill-name">Cryptocurrency & Web3</span>
+            <span class="skill-level-badge">Not Started</span>
+          </div>
+          <span class="skill-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('Cryptocurrency kya hota hai? India mein crypto legal hai? Beginners guide chahiye')">Start ↗</button>
+        </div>
+      </div>
+
+      <div class="skill-item" data-cat="tech">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">🤖</span>
+            <span class="skill-name">Artificial Intelligence & ML</span>
+            <span class="skill-level-badge">Not Started</span>
+          </div>
+          <span class="skill-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('AI aur Machine Learning kaise seekhein? Free resources batao Indian students ke liye — Python se shuru karein?')">Start ↗</button>
+        </div>
+      </div>
+
+      <div class="skill-item" data-cat="creative">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">🎨</span>
+            <span class="skill-name">Graphic Design & UI/UX</span>
+            <span class="skill-level-badge">Not Started</span>
+          </div>
+          <span class="skill-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('Graphic design aur UI UX design kaise seekhein? Figma se shuru karna chahiye? Free resources batao')">Start ↗</button>
+        </div>
+      </div>
+
+      <div class="skill-item" data-cat="business">
+        <div class="skill-header">
+          <div class="skill-name-row">
+            <span class="skill-emoji">📣</span>
+            <span class="skill-name">Digital Marketing</span>
+            <span class="skill-level-badge">Not Started</span>
+          </div>
+          <span class="skill-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        <div class="skill-actions">
+          <button class="btn-sm primary" onclick="gotoAI('Digital marketing kaise seekhein? SEO, social media, ads — India mein career kaise banayein?')">Start ↗</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLEGES -->
+<section class="page-section" id="sec-colleges">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-eyebrow">✦ College Search</div>
+      <div class="page-title">Apna College Dhundo</div>
+      <div class="page-desc">20+ colleges — IIT, NIT, AIIMS, Private, Law — filter karke best option dekho</div>
+    </div>
+
+    <div class="inner-search">
+      <span class="inner-search-icon">🔍</span>
+      <input type="text" placeholder="College ya city ka naam likho..." id="col-search" onkeydown="if(event.key==='Enter')colSearch()" />
+      <button class="inner-search-btn" onclick="colSearch()">Search →</button>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterCol('all',this)">Sab</button>
+      <button class="filter-btn" onclick="filterCol('iit',this)">🏆 IIT</button>
+      <button class="filter-btn" onclick="filterCol('nit',this)">🎓 NIT</button>
+      <button class="filter-btn" onclick="filterCol('private',this)">🏢 Private</button>
+      <button class="filter-btn" onclick="filterCol('medical',this)">🏥 Medical</button>
+      <button class="filter-btn" onclick="filterCol('law',this)">⚖️ Law</button>
+    </div>
+
+    <div id="col-list">
+      <div class="college-item" data-type="iit">
+        <div class="college-rank">#1</div>
+        <div class="college-info">
+          <div class="college-name">IIT Bombay</div>
+          <div class="college-loc">📍 Mumbai, Maharashtra</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Advanced</span><span class="ctag">₹2.2L/yr</span><span class="ctag">NIRF #1</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('IIT Bombay mein admission kaise milega? JEE Advanced cutoff 2024, preparation tips aur best branches batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="iit">
+        <div class="college-rank">#2</div>
+        <div class="college-info">
+          <div class="college-name">IIT Delhi</div>
+          <div class="college-loc">📍 New Delhi</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Advanced</span><span class="ctag">₹2.2L/yr</span><span class="ctag">NIRF #2</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('IIT Delhi CS branch ke liye JEE Advanced cutoff kya hai? Admission process samjhao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="iit">
+        <div class="college-rank">#3</div>
+        <div class="college-info">
+          <div class="college-name">IIT Madras</div>
+          <div class="college-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Advanced</span><span class="ctag">₹2.2L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('IIT Madras ke baare mein batao — admission, placement, best courses kaunse hain')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="nit">
+        <div class="college-rank">N#1</div>
+        <div class="college-info">
+          <div class="college-name">NIT Trichy</div>
+          <div class="college-loc">📍 Tiruchirappalli, Tamil Nadu</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Mains</span><span class="ctag">₹1.5L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('NIT Trichy mein admission ke liye JEE Mains cutoff aur best branches kaunsi hain?')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="nit">
+        <div class="college-rank">N#2</div>
+        <div class="college-info">
+          <div class="college-name">NIT Warangal</div>
+          <div class="college-loc">📍 Warangal, Telangana</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Mains</span><span class="ctag">₹1.4L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('NIT Warangal CSE mein admission cutoff aur placement kya hai?')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="medical">
+        <div class="college-rank">M#1</div>
+        <div class="college-info">
+          <div class="college-name">AIIMS New Delhi</div>
+          <div class="college-loc">📍 New Delhi</div>
+          <div class="college-tags">
+            <span class="ctag">Medical MBBS</span><span class="ctag">NEET</span><span class="ctag">₹1.5K/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('AIIMS Delhi MBBS ke liye NEET cutoff aur preparation strategy 2025 mein batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="medical">
+        <div class="college-rank">M#2</div>
+        <div class="college-info">
+          <div class="college-name">JIPMER Puducherry</div>
+          <div class="college-loc">📍 Puducherry</div>
+          <div class="college-tags">
+            <span class="ctag">Medical MBBS</span><span class="ctag">NEET</span><span class="ctag">₹5K/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('JIPMER Puducherry MBBS admission process aur NEET cutoff batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="private">
+        <div class="college-rank">P#1</div>
+        <div class="college-info">
+          <div class="college-name">VIT Vellore</div>
+          <div class="college-loc">📍 Vellore, Tamil Nadu</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">VITEEE</span><span class="ctag">₹1.98L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('VIT Vellore mein admission kaise lein? VITEEE exam aur placement package batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="private">
+        <div class="college-rank">P#2</div>
+        <div class="college-info">
+          <div class="college-name">Manipal Institute of Technology</div>
+          <div class="college-loc">📍 Manipal, Karnataka</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">MET</span><span class="ctag">₹2.4L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('Manipal Institute of Technology mein admission aur placement ke baare mein batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="law">
+        <div class="college-rank">L#1</div>
+        <div class="college-info">
+          <div class="college-name">NLSIU Bangalore</div>
+          <div class="college-loc">📍 Bengaluru, Karnataka</div>
+          <div class="college-tags">
+            <span class="ctag">Law LLB</span><span class="ctag">CLAT</span><span class="ctag">₹2.5L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('NLSIU Bangalore law college CLAT cutoff aur preparation strategy batao')">Guide ↗</button>
+      </div>
+
+      <!-- MORE IITs -->
+      <div class="college-item" data-type="iit">
+        <div class="college-rank">#4</div>
+        <div class="college-info">
+          <div class="college-name">IIT Kharagpur</div>
+          <div class="college-loc">📍 Kharagpur, West Bengal</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Advanced</span><span class="ctag">₹2.2L/yr</span><span class="ctag">Oldest IIT</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('IIT Kharagpur mein admission cutoff aur best branches kaunsi hain? Placement package batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="iit">
+        <div class="college-rank">#5</div>
+        <div class="college-info">
+          <div class="college-name">IIT Kanpur</div>
+          <div class="college-loc">📍 Kanpur, Uttar Pradesh</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Advanced</span><span class="ctag">₹2.2L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('IIT Kanpur CSE aur AI branch ke liye JEE cutoff aur placement details batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="iit">
+        <div class="college-rank">#6</div>
+        <div class="college-info">
+          <div class="college-name">IIT Roorkee</div>
+          <div class="college-loc">📍 Roorkee, Uttarakhand</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Advanced</span><span class="ctag">₹2.2L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('IIT Roorkee ke baare mein batao — cutoff, campus, placement aur best branches')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="iit">
+        <div class="college-rank">#7</div>
+        <div class="college-info">
+          <div class="college-name">IIT Hyderabad</div>
+          <div class="college-loc">📍 Hyderabad, Telangana</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Advanced</span><span class="ctag">₹2.2L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('IIT Hyderabad cutoff aur AI ML branch ke baare mein batao')">Guide ↗</button>
+      </div>
+
+      <!-- MORE NITs -->
+      <div class="college-item" data-type="nit">
+        <div class="college-rank">N#3</div>
+        <div class="college-info">
+          <div class="college-name">NIT Surathkal (NITK)</div>
+          <div class="college-loc">📍 Mangaluru, Karnataka</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Mains</span><span class="ctag">₹1.5L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('NIT Surathkal NITK mein admission cutoff aur placement stats batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="nit">
+        <div class="college-rank">N#4</div>
+        <div class="college-info">
+          <div class="college-name">NIT Allahabad (MNNIT)</div>
+          <div class="college-loc">📍 Prayagraj, Uttar Pradesh</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Mains</span><span class="ctag">₹1.4L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('MNNIT Allahabad mein CSE admission cutoff aur campus life ke baare mein batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="nit">
+        <div class="college-rank">N#5</div>
+        <div class="college-info">
+          <div class="college-name">NIT Jaipur (MNIT)</div>
+          <div class="college-loc">📍 Jaipur, Rajasthan</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE Mains</span><span class="ctag">₹1.3L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('MNIT Jaipur mein admission, cutoff aur placement details batao')">Guide ↗</button>
+      </div>
+
+      <!-- MORE MEDICAL -->
+      <div class="college-item" data-type="medical">
+        <div class="college-rank">M#3</div>
+        <div class="college-info">
+          <div class="college-name">AIIMS Rishikesh</div>
+          <div class="college-loc">📍 Rishikesh, Uttarakhand</div>
+          <div class="college-tags">
+            <span class="ctag">Medical MBBS</span><span class="ctag">NEET</span><span class="ctag">₹1.5K/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('AIIMS Rishikesh MBBS NEET cutoff aur admission process batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="medical">
+        <div class="college-rank">M#4</div>
+        <div class="college-info">
+          <div class="college-name">Maulana Azad Medical College</div>
+          <div class="college-loc">📍 New Delhi</div>
+          <div class="college-tags">
+            <span class="ctag">Medical MBBS</span><span class="ctag">NEET</span><span class="ctag">₹15K/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('Maulana Azad Medical College Delhi NEET cutoff aur admission process samjhao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="medical">
+        <div class="college-rank">M#5</div>
+        <div class="college-info">
+          <div class="college-name">Grant Medical College Mumbai</div>
+          <div class="college-loc">📍 Mumbai, Maharashtra</div>
+          <div class="college-tags">
+            <span class="ctag">Medical MBBS</span><span class="ctag">NEET</span><span class="ctag">₹30K/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('Grant Medical College Mumbai mein admission aur NEET cutoff ke baare mein batao')">Guide ↗</button>
+      </div>
+
+      <!-- MORE PRIVATE -->
+      <div class="college-item" data-type="private">
+        <div class="college-rank">P#3</div>
+        <div class="college-info">
+          <div class="college-name">SRM Institute of Science & Tech</div>
+          <div class="college-loc">📍 Chennai, Tamil Nadu</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">SRMJEEE</span><span class="ctag">₹2.5L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('SRM University Chennai mein admission, fees aur placement package batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="private">
+        <div class="college-rank">P#4</div>
+        <div class="college-info">
+          <div class="college-name">Amity University Noida</div>
+          <div class="college-loc">📍 Noida, Uttar Pradesh</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering / BBA</span><span class="ctag">Direct Admission</span><span class="ctag">₹2.2L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('Amity University Noida mein admission process, courses aur placement ke baare mein batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="private">
+        <div class="college-rank">P#5</div>
+        <div class="college-info">
+          <div class="college-name">Lovely Professional University</div>
+          <div class="college-loc">📍 Phagwara, Punjab</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering / MBA</span><span class="ctag">LPUNEST</span><span class="ctag">₹1.6L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('LPU Lovely Professional University mein admission, scholarship aur placement batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="private">
+        <div class="college-rank">P#6</div>
+        <div class="college-info">
+          <div class="college-name">Thapar Institute of Engineering</div>
+          <div class="college-loc">📍 Patiala, Punjab</div>
+          <div class="college-tags">
+            <span class="ctag">Engineering</span><span class="ctag">JEE / Direct</span><span class="ctag">₹2.3L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('Thapar University Patiala mein CSE aur placement package ke baare mein batao')">Guide ↗</button>
+      </div>
+
+      <!-- MORE LAW -->
+      <div class="college-item" data-type="law">
+        <div class="college-rank">L#2</div>
+        <div class="college-info">
+          <div class="college-name">NALSAR University of Law</div>
+          <div class="college-loc">📍 Hyderabad, Telangana</div>
+          <div class="college-tags">
+            <span class="ctag">Law LLB</span><span class="ctag">CLAT</span><span class="ctag">₹2.2L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('NALSAR Hyderabad law college CLAT cutoff aur admission process batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="law">
+        <div class="college-rank">L#3</div>
+        <div class="college-info">
+          <div class="college-name">NLU Delhi (NLU-D)</div>
+          <div class="college-loc">📍 New Delhi</div>
+          <div class="college-tags">
+            <span class="ctag">Law LLB</span><span class="ctag">AILET</span><span class="ctag">₹2.0L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('NLU Delhi AILET exam preparation aur cutoff ke baare mein batao')">Guide ↗</button>
+      </div>
+      <div class="college-item" data-type="law">
+        <div class="college-rank">L#4</div>
+        <div class="college-info">
+          <div class="college-name">Symbiosis Law School Pune</div>
+          <div class="college-loc">📍 Pune, Maharashtra</div>
+          <div class="college-tags">
+            <span class="ctag">Law LLB</span><span class="ctag">SLAT</span><span class="ctag">₹2.8L/yr</span>
+          </div>
+        </div>
+        <button class="btn-sm primary" onclick="gotoAI('Symbiosis Law School Pune mein admission, fees aur placement ke baare mein batao')">Guide ↗</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section class="page-section" id="sec-careers">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-eyebrow">✦ Career Roadmaps</div>
+      <div class="page-title">Kaunsa Career Choose Karoge?</div>
+      <div class="page-desc">Har career ka complete step-by-step roadmap — click karo aur shuru ho jao</div>
+    </div>
+
+    <div class="career-grid">
+      <div class="career-card" onclick="loadCareer('youtube')">
+        <span class="career-icon">📺</span>
+        <div class="career-title">YouTube</div>
+        <div class="career-sub">Creator Roadmap</div>
+      </div>
+      <div class="career-card" onclick="loadCareer('trading')">
+        <span class="career-icon">📈</span>
+        <div class="career-title">Trading</div>
+        <div class="career-sub">Stock & Crypto</div>
+      </div>
+      <div class="career-card" onclick="loadCareer('business')">
+        <span class="career-icon">💼</span>
+        <div class="career-title">Business</div>
+        <div class="career-sub">Startup Guide</div>
+      </div>
+      <div class="career-card" onclick="loadCareer('engineering')">
+        <span class="career-icon">💻</span>
+        <div class="career-title">Engineering</div>
+        <div class="career-sub">Tech Career</div>
+      </div>
+      <div class="career-card" onclick="loadCareer('upsc')">
+        <span class="career-icon">🎖️</span>
+        <div class="career-title">UPSC / IAS</div>
+        <div class="career-sub">Civil Services</div>
+      </div>
+      <div class="career-card" onclick="loadCareer('freelancing')">
+        <span class="career-icon">🌐</span>
+        <div class="career-title">Freelancing</div>
+        <div class="career-sub">Earn Online</div>
+      </div>
+      <div class="career-card" onclick="loadCareer('medical')">
+        <span class="career-icon">🏥</span>
+        <div class="career-title">Medical</div>
+        <div class="career-sub">NEET & MBBS</div>
+      </div>
+      <div class="career-card" onclick="loadCareer('marketing')">
+        <span class="career-icon">📣</span>
+        <div class="career-title">Digital Marketing</div>
+        <div class="career-sub">Career Guide</div>
+      </div>
+    </div>
+
+    <div id="career-roadmap-box"></div>
+  </div>
+</section>
+
+<!-- LEARN -->
+<section class="page-section" id="sec-learn">
+  <div class="inner-page">
+    <div class="page-header">
+      <div class="page-eyebrow">✦ Free Resources</div>
+      <div class="page-title">Seekho — Bilkul Free</div>
+      <div class="page-desc">Best curated resources — YouTube channels, books, courses — Indian students ke liye</div>
+    </div>
+    <div class="learn-grid">
+      <div class="learn-card" onclick="gotoAI('Trading seekhne ke liye best free YouTube channels aur resources batao India ke liye — Zerodha Varsity, CA Rachana etc')">
+        <span class="learn-icon">📈</span>
+        <div class="learn-title">Trading Resources</div>
+        <div class="learn-desc">Zerodha Varsity, CA Rachana Phadke, free books, mock portfolios</div>
+      </div>
+      <div class="learn-card" onclick="gotoAI('Coding seekhne ke liye best free resources batao — Hindi aur English dono mein, beginners ke liye')">
+        <span class="learn-icon">💻</span>
+        <div class="learn-title">Coding Resources</div>
+        <div class="learn-desc">freeCodeCamp, CS50, Code With Harry, Apna College</div>
+      </div>
+      <div class="learn-card" onclick="gotoAI('Business aur entrepreneurship ke liye best books aur YouTube channels batao — Hindi mein bhi batao')">
+        <span class="learn-icon">📖</span>
+        <div class="learn-title">Business Books</div>
+        <div class="learn-desc">Rich Dad Poor Dad, Zero to One, The Lean Startup — summaries</div>
+      </div>
+      <div class="learn-card" onclick="gotoAI('UPSC preparation ke liye best free resources, YouTube channels, strategy aur schedule batao')">
+        <span class="learn-icon">🎖️</span>
+        <div class="learn-title">UPSC Resources</div>
+        <div class="learn-desc">Drishti IAS, BYJU's IAS, free mock tests, newspapers list</div>
+      </div>
+      <div class="learn-card" onclick="gotoAI('YouTube creator banne ke liye best free courses aur tools batao — editing, thumbnail, SEO sab')">
+        <span class="learn-icon">📺</span>
+        <div class="learn-title">YouTube Creator Tools</div>
+        <div class="learn-desc">CapCut, Canva, TubeBuddy — free tools for creators</div>
+      </div>
+      <div class="learn-card" onclick="gotoAI('AI aur machine learning seekhne ke liye best free courses batao — Google, Coursera, Kaggle')">
+        <span class="learn-icon">🤖</span>
+        <div class="learn-title">AI & ML Courses</div>
+        <div class="learn-desc">Google ML Crash Course, fast.ai, Kaggle Learn — all free</div>
+      </div>
+      <div class="learn-card" onclick="gotoAI('Digital marketing ke liye Google certifications aur free courses batao — SEO, Social Media')">
+        <span class="learn-icon">📣</span>
+        <div class="learn-title">Digital Marketing</div>
+        <div class="learn-desc">Google Digital Garage, HubSpot, Meta Blueprint — free certifications</div>
+      </div>
+      <div class="learn-card" onclick="gotoAI('Freelancing shuru karne ke liye kya seekhein? Fiverr, Upwork pe kaise kaam milega?')">
+        <span class="learn-icon">🌐</span>
+        <div class="learn-title">Freelancing Guide</div>
+        <div class="learn-desc">Fiverr, Upwork, Toptal — kaise start karein, profile tips</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button class="ai-advisor-btn" onclick="gotoAI('Mujhe apna career plan banane mein help karo — meri interests ke hisaab se best path kaunsa hai?')">
+  🚀 AI Career Advisor ↗
+</button>
+
+<script>
+const roadmaps = {
+  youtube: {
+    title: '📺 YouTube Creator Roadmap',
+    steps: [
+      { n:'1', t:'Niche decide karo', d:'Tech, finance, education, comedy, gaming — apna passion + audience demand dekho. Niche jitna specific, utna better.', done:true },
+      { n:'2', t:'Equipment setup (Budget friendly)', d:'Sirf phone se shuru karo. Stabilizer ₹500, mic ₹300 se kaam chalao. Subscribe badhne pe upgrade karna.', done:true },
+      { n:'3', t:'First 10-20 videos banao', d:'Quality over quantity. Consistency rakho — weekly 1-2 videos. Script likhna seekho, thumbnail catchy banao.', done:false },
+      { n:'4', t:'SEO master karo', d:'TubeBuddy ya vidIQ use karo. Title mein keywords, description mein timestamps, tags relevant rakhna seekho.', done:false },
+      { n:'5', t:'1000 Subscribers achieve karo', d:'Community build karo — comments ka reply do, Shorts bhi banao. Cross-promote karo dusre creators ke saath.', done:false },
+      { n:'6', t:'Monetization — Multiple streams', d:'1K subs + 4K watch hours = AdSense. Phir sponsorships, affiliate marketing, merchandise — multiple income.', done:false },
+    ],
+    ai: 'YouTube creator ke liye complete monetization strategy batao — AdSense ke alawa aur kaise paise kamayein?'
+  },
+  trading: {
+    title: '📈 Stock Market Trading Roadmap',
+    steps: [
+      { n:'1', t:'Basics seekho pehle', d:'Stock market kya hai, BSE/NSE kaise kaam karta hai, basic terms — equity, index, derivatives. Zerodha Varsity padho.', done:true },
+      { n:'2', t:'Demat account kholao', d:'Zerodha ya Groww pe free account kholo. Paper trading se practice karo — real paise lagane se pehle.', done:false },
+      { n:'3', t:'Technical Analysis seekho', d:'Candlestick patterns, support/resistance, moving averages, RSI, MACD — yeh sab systematically seekho.', done:false },
+      { n:'4', t:'Risk management — SABSE IMPORTANT', d:'Kabhi bhi ek trade pe 2% se zyada mat lagao. Stop loss hamesha lagao. Greed aur fear se door raho.', done:false },
+      { n:'5', t:'One strategy perfect karo', d:'Swing trading ya positional se shuru karo. Intraday baad mein. Ek strategy master karo pehle.', done:false },
+      { n:'6', t:'Trading journal rakho', d:'Har trade record karo — entry, exit, reason, result. Mahine mein review karo, mistakes se seekho.', done:false },
+    ],
+    ai: 'Stock market trading beginners ke liye India mein best strategy kaunsi hai? Risk management tips batao.'
+  },
+  business: {
+    title: '💼 Business & Startup Roadmap',
+    steps: [
+      { n:'1', t:'Problem identify karo', d:'Market mein kaunsi problem hai jisko tum solve kar sakte ho? Customer pain point dhundo — yahi business ka base hai.', done:true },
+      { n:'2', t:'Market research karo', d:'Target audience kaun hai? Competition kitni hai? Market size kitna bada hai? Free tools — Google Trends, Statista.', done:false },
+      { n:'3', t:'MVP banao', d:'Minimum Viable Product — sirf basic features ke saath launch karo. Feedback lo, phir improve karo. Perfectionism avoid karo.', done:false },
+      { n:'4', t:'Legal setup karo', d:'Sole proprietorship ya Pvt Ltd? GST registration, bank account, legal documents. CA se ek baar zaroor milna.', done:false },
+      { n:'5', t:'Customers aur revenue', d:'First 10 customers khud dhundo. Word of mouth, cold outreach, social media. Revenue aane pe scale karo.', done:false },
+      { n:'6', t:'Funding (Zaroorat ho tabhih)', d:'Bootstrapping best hai shuru mein. Agar scale karna hai — Angel investors, incubators (IIT TBI, NSRCEL), SIDBI loans.', done:false },
+    ],
+    ai: 'India mein 2025 mein konsa business shuru karna best hai? Low investment, high return business ideas batao.'
+  },
+  engineering: {
+    title: '💻 Software Engineering Roadmap',
+    steps: [
+      { n:'1', t:'Programming fundamentals', d:'Python ya C++ se shuru karo. Logic building, DSA basics, problem solving practice — LeetCode easy problems.', done:true },
+      { n:'2', t:'DSA master karo', d:'Arrays, LinkedList, Trees, Graphs, DP — yeh FAANG interviews ki reet hain. Striver\'s DSA Sheet follow karo.', done:false },
+      { n:'3', t:'Web ya App development', d:'Frontend (React), Backend (Node.js/Django), ya Full Stack. Ek domain choose karo aur deep jaao.', done:false },
+      { n:'4', t:'Projects banao — Portfolio', d:'3-4 real projects GitHub pe daalo. Open source contribute karo. Projects hi tumhara pehla impression hain.', done:false },
+      { n:'5', t:'Internship pao', d:'LinkedIn, Internshala, AngelList se apply karo. College connections use karo. Resume strong banao.', done:false },
+      { n:'6', t:'Placements / Job', d:'Target companies research karo. Mock interviews, referrals, LinkedIn networking. Offer negotiate karna seekho.', done:false },
+    ],
+    ai: 'Software engineering mein 2025 mein konsi skills sabse zyada demand mein hain? FAANG interview preparation kaise karein?'
+  },
+  upsc: {
+    title: '🎖️ UPSC IAS Roadmap',
+    steps: [
+      { n:'1', t:'Syllabus aur pattern samjho', d:'Prelims (GS + CSAT), Mains (9 papers), Interview — teen stages samjho. Optional subject wisely choose karo.', done:true },
+      { n:'2', t:'NCERT foundation', d:'6th-12th NCERT — History, Geography, Polity, Economics. Yeh base hai, iske bina aage badhna mushkil.', done:false },
+      { n:'3', t:'Standard books padho', d:'Laxmikanth (Polity), Bipin Chandra (History), Spectrum, GC Leong. Notes saath-saath banao.', done:false },
+      { n:'4', t:'Current affairs daily', d:'The Hindu ya Indian Express — daily 1-2 ghante. Monthly magazines — Vision IAS, Drishti. Notes banao.', done:false },
+      { n:'5', t:'Answer writing practice', d:'Mains ke liye structured answer writing zaroor seekho. Weekly test series join karo. Feedback lo.', done:false },
+      { n:'6', t:'Mock tests aur revision', d:'Prelims se 3 month pehle mock tests shuru karo. Revision cycles complete karo. Interview preparation alag se.', done:false },
+    ],
+    ai: 'UPSC IAS preparation ke liye 1-2 saal ka complete schedule aur strategy batao — working student ke liye bhi plan chahiye.'
+  },
+  freelancing: {
+    title: '🌐 Freelancing Roadmap',
+    steps: [
+      { n:'1', t:'Skill choose karo', d:'Writing, design, coding, video editing, social media management — koi bhi ek skill deeply seekho. Niche ban.', done:true },
+      { n:'2', t:'Portfolio banao', d:'3-5 sample projects banao — real client na ho toh bhi. GitHub, Behance, ya personal website pe daalo.', done:false },
+      { n:'3', t:'Platforms pe profile banao', d:'Fiverr, Upwork, Toptal, LinkedIn — saare pe professional profile. Bio compelling likhna seekho.', done:false },
+      { n:'4', t:'Pehle clients dhundo', d:'Pehle kuch kaam free/discounted karo review ke liye. Network use karo. Cold emails bhejo. Referrals maango.', done:false },
+      { n:'5', t:'Rate badhate jao', d:'Experience ke saath rate increase karo. Package deals offer karo. Retainer clients ki value samjho.', done:false },
+      { n:'6', t:'Scale karo — Agency bano', d:'Subcontractors hire karo, team banao, agency scale karo. Passive income streams add karo.', done:false },
+    ],
+    ai: 'Freelancing shuru karne ke liye India mein kaunsi skill sabse zyada demand mein hai? Fiverr pe pehla gig kaise banayein?'
+  },
+  medical: {
+    title: '🏥 Medical / MBBS Roadmap',
+    steps: [
+      { n:'1', t:'11th-12th Biology foundation', d:'PCB strong karo. NCERT Biology line-by-line padho — yahi NEET ka core hai. Physics aur Chemistry bhi.', done:true },
+      { n:'2', t:'NEET preparation shuru', d:'11th se hi shuru karo. Coaching ya self-study — dono work karti hai. Practice questions daily solve karo.', done:false },
+      { n:'3', t:'Mock tests aur PYQs', d:'Last 10 saal ke NEET papers solve karo. Mock tests weekly. Weak subjects identify karo aur fix karo.', done:false },
+      { n:'4', t:'NEET qualify karo', d:'720 mein se max score ke liye koshish karo. AIIMS ke liye 680+, government MBBS ke liye 550+.', done:false },
+      { n:'5', t:'Counselling aur college', d:'MCC counselling ke rounds samjho. State quota vs All India quota. AIIMS alag admit karta hai directly.', done:false },
+      { n:'6', t:'MBBS 5.5 saal + Internship', d:'Patience raho. MD/MS ke liye NEET PG bhi dena hoga. Specialization choose wisely karo.', done:false },
+    ],
+    ai: 'NEET 2025 ke liye best preparation strategy batao — self-study ya coaching? Resources aur schedule chahiye.'
+  },
+  marketing: {
+    title: '📣 Digital Marketing Roadmap',
+    steps: [
+      { n:'1', t:'Fundamentals seekho', d:'SEO, SEM, SMM, Email, Content Marketing, Affiliate — sabke basics samjho. Google Digital Garage free hai.', done:true },
+      { n:'2', t:'One channel master karo', d:'SEO ya Social Media se shuru karo. Ek platform pe expert bano pehle — Instagram, YouTube, ya Google Ads.', done:false },
+      { n:'3', t:'Free certifications lo', d:'Google Analytics, Google Ads, HubSpot, Meta Blueprint — sabhi free certifications resume ke liye valuable hain.', done:false },
+      { n:'4', t:'Real projects karo', d:'Kisi local business ki free marketing karo practice ke liye. Results dekho, portfolio mein daalo.', done:false },
+      { n:'5', t:'Job ya Freelance', d:'Agency mein job — seekhne ka best place. Ya directly freelancing shuru karo. LinkedIn strong rakhna.', done:false },
+      { n:'6', t:'Specialize aur scale', d:'Performance Marketing, Growth Hacking, ya Brand Strategy — ek area mein expert bano. Rates badhao.', done:false },
+    ],
+    ai: 'Digital marketing mein career kaise banayein India mein? Kaunsi skill sabse zyada salary deti hai — SEO, Google Ads ya Social Media?'
+  }
+};
+
+function loadCareer(key) {
+  const r = roadmaps[key];
+  if (!r) return;
+  const box = document.getElementById('career-roadmap-box');
+  let html = `<div class="roadmap-wrap"><div class="roadmap-title">${r.title}</div>`;
+  r.steps.forEach((s, i) => {
+    const isLast = i === r.steps.length - 1;
+    html += `<div class="roadmap-step">
+      <div class="step-dot-wrap">
+        <div class="step-dot${s.done?' done':''}">${s.n}</div>
+        ${!isLast ? '<div class="step-line"></div>' : ''}
+      </div>
+      <div class="step-body">
+        <div class="step-title">${s.t}</div>
+        <div class="step-desc">${s.d}</div>
+      </div>
+    </div>`;
+  });
+  html += `<button class="btn-sm primary" style="margin-top:1rem" onclick="gotoAI('${r.ai}')">AI se Detailed Guide Lao ↗</button></div>`;
+  box.innerHTML = html;
+  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function showSection(id) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  ['home','skills','colleges','careers','learn'].forEach(k => {
+    const el = document.getElementById('nl-' + k);
+    if (el) el.classList.toggle('active', k === id);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function heroSearch() {
+  const q = document.getElementById('hero-search').value.trim();
+  if (q) gotoAI('Apexora mein search: "' + q + '" — iske baare mein career, skill ya college guidance chahiye mujhe');
+}
+
+function colSearch() {
+  const q = document.getElementById('col-search').value.trim();
+  if (q) gotoAI(q + ' ke baare mein batao — admission process, fees, cutoff, aur placement details');
+}
+
+function filterSkills(cat, btn) {
+  document.querySelectorAll('#skills-list .skill-item').forEach(el => {
+    el.style.display = (cat === 'all' || el.dataset.cat === cat) ? 'block' : 'none';
+  });
+  document.querySelectorAll('#sec-skills .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function filterCol(type, btn) {
+  document.querySelectorAll('#col-list .college-item').forEach(el => {
+    el.style.display = (type === 'all' || el.dataset.type === type) ? 'flex' : 'none';
+  });
+  document.querySelectorAll('#sec-colleges .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  item.classList.toggle('open');
+}
+
+function gotoAI(msg) {
+  const url = 'https://claude.ai/new?q=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+}
+
+loadCareer('youtube');
+</script>
+</body>
+</html>
